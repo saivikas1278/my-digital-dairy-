@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const bcrypt = require('bcryptjs');
@@ -13,7 +14,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '../frontend')));
 
 // MongoDB connection
-mongoose.connect('mongodb://localhost:27017/my-words')
+mongoose.connect(process.env.MONGODB_URI)
 
 .then(() => console.log('✅ MongoDB connected'))
 .catch((err) => console.error('❌ MongoDB connection error:', err));
@@ -52,11 +53,14 @@ app.get('/', (req, res) => {
 
 app.post('/registerform', async (req, res) => {
   const { name, email, password } = req.body;
+  if (!email || !password) return res.status(400).send('Missing fields');
+  const normalizedEmail = email.trim().toLowerCase();
+  
   try {
-    const existingUser = await User.findOne({ email });
+    const existingUser = await User.findOne({ email: normalizedEmail });
     if (existingUser) return res.status(400).send('User already exists');
     const hashedPassword = await bcrypt.hash(password, 10); // Hash password!
-    const newUser = new User({ name, email, password: hashedPassword });
+    const newUser = new User({ name, email: normalizedEmail, password: hashedPassword });
     await newUser.save();
     res.status(200).send('Registration successful');
   } catch (err) {
@@ -66,8 +70,11 @@ app.post('/registerform', async (req, res) => {
 
 app.post('/userlogin', async (req, res) => {
   const { email, password } = req.body;
+  if (!email || !password) return res.status(400).json({ message: 'Missing fields' });
+  const normalizedEmail = email.trim().toLowerCase();
+  
   try {
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email: normalizedEmail });
     if (!user) return res.status(401).json({ message: 'User not found' });
 
     const isMatch = await bcrypt.compare(password, user.password); // Compare hash!
@@ -135,6 +142,7 @@ app.put('/posts/:id', async (req, res) => {
   }
 });
 
-app.listen(20000, () => {
-  console.log('Server is running on port 20000');
+const PORT = process.env.PORT || 20000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });

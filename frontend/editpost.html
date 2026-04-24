@@ -7,167 +7,22 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Edu+SA+Hand:wght@400..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="neobrutalism.css">
+    <script src="neo-popup.js"></script>
+    <script src="config.js"></script>
     <style>
-      body{
-        font-family: 'Edu SA Hand', cursive; 
-        background: url('bgimg.jpg') no-repeat center center fixed;
-        background-size: cover;
-        min-height: 100vh;
-      }
-      
-      .edit-container {
-        max-width: 600px;
-        margin: 40px auto;
-        padding: 20px;
-      }
-      
-      .edit-card {
-        background: rgba(255, 255, 255, 0.95);
-        padding: 40px;
-        border-radius: 20px;
-        box-shadow: 0 8px 32px rgba(0,0,0,0.12), 0 1.5px 4px rgba(0,0,0,0.08);
-        border: 1px solid #f3e9d2;
-        -webkit-backdrop-filter: blur(10px);
-        backdrop-filter: blur(10px);
-      }
-      
-      .edit-form {
-        display: none;
-      }
-      
-      .updating-text {
-        display: none;
-      }
-      
-      .edit-title {
-        font-family: 'Pacifico', cursive;
-        color: #174c8e;
-        text-align: center;
-        margin-bottom: 30px;
-        font-size: 2.5rem;
-      }
-      
-      .form-label {
-        font-weight: 600;
-        color: #174c8e;
-        margin-bottom: 8px;
-        letter-spacing: 0.5px;
-      }
-      
-      .form-control, .form-select {
-        border-radius: 12px;
-        border: 2px solid #e0d7c6;
-        padding: 12px 16px;
-        font-size: 1.1rem;
-        transition: border-color 0.3s, box-shadow 0.3s;
-        font-family: 'Edu SA Hand', cursive;
-      }
-      
-      .form-control:focus, .form-select:focus {
-        border-color: #174c8e;
-        box-shadow: 0 0 12px rgba(23, 76, 142, 0.25);
-        outline: none;
-      }
-      
-      .btn-update {
-        background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
-        border: none;
-        color: #fff;
-        font-weight: 600;
-        padding: 14px 0;
-        border-radius: 12px;
-        font-size: 1.2rem;
-        letter-spacing: 1px;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
-      }
-      
-      .btn-update:hover {
-        background: linear-gradient(135deg, #218838 0%, #1abc9c 100%);
-        transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
-        color: #fff;
-      }
-      
-      .btn-cancel {
-        background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
-        border: none;
-        color: #fff;
-        font-weight: 600;
-        padding: 14px 0;
-        border-radius: 12px;
-        font-size: 1.1rem;
-        letter-spacing: 1px;
-        transition: all 0.3s ease;
-      }
-      
-      .btn-cancel:hover {
-        background: linear-gradient(135deg, #5a6268 0%, #343a40 100%);
-        transform: translateY(-2px);
-        color: #fff;
-      }
-      
-      .back-button {
-        position: absolute;
-        top: 20px;
-        left: 20px;
-        z-index: 10;
-        border-radius: 25px;
-        padding: 10px 20px;
-      }
-      
-      .loading-spinner {
-        display: none;
-        text-align: center;
-        padding: 20px;
-      }
-      
-      .category-select, .mood-select {
-        margin-bottom: 20px;
-      }
-      
-      /* Dark mode styles */
-      body.dark-mode {
-        background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-      }
-      
-      body.dark-mode .edit-card {
-        background: rgba(30, 30, 50, 0.95);
-        border-color: #444;
-        color: #e0e0e0;
-      }
-      
-      body.dark-mode .edit-title {
-        color: #7db8ff;
-      }
-      
-      body.dark-mode .form-label {
-        color: #7db8ff;
-      }
-      
-      body.dark-mode .form-control,
-      body.dark-mode .form-select {
-        background: rgba(40, 40, 60, 0.8);
-        border-color: #555;
-        color: #e0e0e0;
-      }
-      
-      body.dark-mode .form-control:focus,
-      body.dark-mode .form-select:focus {
-        border-color: #7db8ff;
-        box-shadow: 0 0 12px rgba(125, 184, 255, 0.4);
-      }
+      .edit-form { display: none; }
+      .updating-text { display: none; }
     </style>
   </head>
   <body>
-    <a href="feedpage.html" class="btn btn-outline-primary position-absolute back-button">
+    <a href="feedpage.html" class="neo-btn neo-btn-secondary position-absolute back-button" style="top: 20px; left: 20px; z-index: 10;">
       &larr; Back to Feed
     </a>
 
     <div class="edit-container">
-      <div class="edit-card">
-        <h1 class="edit-title">✏️ Edit Your Post</h1>
+      <div class="neo-card edit-card">
+        <h1 class="main-title edit-title">✏️ Edit Your Post</h1>
         
         <div class="loading-spinner" id="loadingSpinner">
           <div class="spinner-border text-primary" role="status">
@@ -177,8 +32,8 @@
         </div>
 
         <form id="editForm" class="edit-form">
-          <div class="row mb-3">
-            <div class="col-md-6">
+          <div class="row mb-4">
+            <div class="col-md-6 mb-3 mb-md-0">
               <label for="editDate" class="form-label">📅 Date</label>
               <input type="date" class="form-control" id="editDate" name="date" required>
             </div>
@@ -199,12 +54,12 @@
             </div>
           </div>
 
-          <div class="mb-3">
+          <div class="mb-4">
             <label for="editTitle" class="form-label">📝 Post Title</label>
             <input type="text" class="form-control" id="editTitle" name="title" placeholder="Enter your post title..." required>
           </div>
           
-          <div class="mb-3">
+          <div class="mb-4">
             <label for="editCategory" class="form-label">📂 Category</label>
             <select class="form-select category-select" id="editCategory" name="category">
               <option value="personal">📝 Personal</option>
@@ -217,14 +72,14 @@
             </select>
           </div>
           
-          <div class="mb-4">
+          <div class="mb-5">
             <label for="editContent" class="form-label">✍️ Your Story</label>
             <textarea class="form-control" id="editContent" name="content" rows="12" placeholder="Update your thoughts, experiences, and reflections..."></textarea>
           </div>
           
-          <div class="row g-3">
+          <div class="row g-4">
             <div class="col-md-8">
-              <button type="submit" class="btn btn-update w-100" id="updateButton">
+              <button type="submit" class="neo-btn btn-update w-100" id="updateButton">
                 <span id="updateText">✅ Update Post</span>
                 <span id="updatingText" class="updating-text">
                   <span class="spinner-border spinner-border-sm me-2" role="status"></span>
@@ -233,7 +88,7 @@
               </button>
             </div>
             <div class="col-md-4">
-              <button type="button" class="btn btn-cancel w-100" onclick="window.history.back()">
+              <button type="button" class="neo-btn neo-btn-danger btn-cancel w-100" onclick="window.history.back()">
                 ❌ Cancel
               </button>
             </div>
@@ -262,13 +117,12 @@
       async function loadPostForEdit() {
         const postId = getPostIdFromUrl();
         if (!postId) {
-          alert('No post ID provided');
-          window.location.href = 'feedpage.html';
+          showNeoPopup('No post ID provided', 'error', 'feedpage.html');
           return;
         }
 
         try {
-          const response = await fetch(`http://localhost:20000/posts/${postId}`);
+          const response = await fetch(`${API_BASE_URL}/posts/${postId}`);
           if (!response.ok) {
             throw new Error('Post not found');
           }
@@ -289,8 +143,7 @@
           
         } catch (error) {
           console.error('Error loading post:', error);
-          alert('Error loading post: ' + error.message);
-          window.location.href = 'feedpage.html';
+          showNeoPopup('Error loading post: ' + error.message, 'error', 'feedpage.html');
         }
       }
 
@@ -313,7 +166,7 @@
           const formData = new FormData(e.target);
           const postData = Object.fromEntries(formData.entries());
 
-          const response = await fetch(`http://localhost:20000/posts/${postId}`, {
+          const response = await fetch(`${API_BASE_URL}/posts/${postId}`, {
             method: 'PUT',
             headers: {
               'Content-Type': 'application/json'
@@ -322,17 +175,14 @@
           });
 
           if (response.ok) {
-            // Show success message
-            alert('✅ Post updated successfully!');
-            // Redirect back to feed
-            window.location.href = 'feedpage.html';
+            showNeoPopup('✅ Post updated successfully!', 'success', 'feedpage.html');
           } else {
             throw new Error('Failed to update post');
           }
           
         } catch (error) {
           console.error('Error updating post:', error);
-          alert('❌ Error updating post: ' + error.message);
+          showNeoPopup('❌ Error updating post: ' + error.message, 'error');
         } finally {
           // Reset button state
           updateButton.disabled = false;

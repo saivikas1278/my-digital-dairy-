@@ -1,0 +1,355 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap');
+
+:root {
+  --neo-bg: #e6e6fa; /* Light lavender background */
+  --neo-border: 3px solid #000;
+  --neo-shadow: 6px 6px 0px #000;
+  --neo-shadow-hover: 2px 2px 0px #000;
+  
+  --color-primary: #00ff66; /* Vibrant Green */
+  --color-secondary: #ff00ff; /* Magenta */
+  --color-tertiary: #ffff00; /* Yellow */
+  --color-dark: #000000;
+  --color-light: #ffffff;
+}
+
+body {
+  font-family: 'Space Grotesk', sans-serif;
+  background-color: var(--neo-bg) !important;
+  color: var(--color-dark);
+  background-image: none !important; /* Overriding the old bgimg.jpg */
+}
+
+/* Base Card / Container */
+.neo-card {
+  background-color: var(--color-light);
+  border: var(--neo-border);
+  box-shadow: var(--neo-shadow);
+  border-radius: 0;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  transition: all 0.2s ease-in-out;
+}
+
+/* Buttons */
+.neo-btn {
+  background-color: var(--color-primary);
+  color: #000;
+  border: var(--neo-border) !important;
+  box-shadow: var(--neo-shadow) !important;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0 !important;
+  transition: all 0.1s ease;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  text-align: center;
+}
+
+.neo-btn:hover {
+  background-color: var(--color-tertiary);
+  color: #000;
+  transform: translate(-2px, -2px);
+  box-shadow: 8px 8px 0px #000 !important;
+}
+
+.neo-btn:active {
+  transform: translate(4px, 4px);
+  box-shadow: 2px 2px 0px #000 !important;
+}
+
+.neo-btn-secondary {
+  background-color: var(--color-secondary);
+  color: #fff;
+}
+
+.neo-btn-danger {
+  background-color: #ff3333;
+  color: #fff;
+}
+
+.neo-btn-warning {
+  background-color: #ff9900;
+  color: #000;
+}
+
+/* Forms */
+.form-control, .form-select, input, textarea {
+  border: var(--neo-border) !important;
+  border-radius: 0 !important;
+  box-shadow: 4px 4px 0px #000 !important;
+  padding: 0.75rem !important;
+  font-family: 'Space Grotesk', sans-serif !important;
+  transition: all 0.2s ease;
+  background-color: var(--color-light) !important;
+}
+
+.form-control:focus, .form-select:focus, input:focus, textarea:focus {
+  outline: none;
+  box-shadow: 6px 6px 0px var(--color-secondary) !important;
+  border-color: #000 !important;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, .card-title {
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #000;
+  border-bottom: 4px solid #000;
+  padding-bottom: 0.5rem;
+  display: inline-block;
+  margin-bottom: 1.5rem;
+}
+
+/* Specific elements */
+.post {
+  background-color: var(--color-light);
+  border: var(--neo-border);
+  box-shadow: var(--neo-shadow);
+  padding: 2rem;
+  margin-bottom: 2rem;
+  transition: all 0.2s;
+  position: relative;
+}
+
+.post:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 10px 10px 0px #000;
+}
+
+.post h1 {
+  border-bottom: none; 
+  font-size: 2rem;
+  background-color: var(--color-tertiary);
+  padding: 0.5rem 1rem;
+  box-shadow: 4px 4px 0px #000;
+  border: 3px solid #000;
+  display: inline-block;
+}
+
+.category-badge {
+  border: 2px solid #000;
+  box-shadow: 3px 3px 0px #000;
+  color: #000 !important;
+  font-weight: 700;
+  border-radius: 0;
+  padding: 4px 8px;
+  background-color: var(--color-light);
+  display: inline-block;
+}
+
+.dark-mode-toggle {
+  background-color: var(--color-tertiary);
+  border: var(--neo-border);
+  box-shadow: 4px 4px 0px #000;
+  border-radius: 0;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+.dark-mode-toggle:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0px #000;
+}
+
+/* Nav */
+.main-title {
+  font-size: 4rem;
+  font-weight: 800;
+  text-shadow: 5px 5px 0px var(--color-secondary);
+  border: none;
+  text-align: center;
+  margin-bottom: 2rem;
+  text-transform: uppercase;
+  color: var(--color-dark);
+}
+
+.title-gradient {
+  background: none;
+  -webkit-background-clip: unset;
+  -webkit-text-fill-color: unset;
+  background-clip: unset;
+  color: inherit;
+}
+
+body.dark-mode {
+  --neo-bg: #1a1a1a;
+  --color-light: #2d2d2d;
+  color: #fff;
+}
+
+body.dark-mode .neo-card, body.dark-mode .post, body.dark-mode .form-control, body.dark-mode .form-select {
+  background-color: #2d2d2d !important;
+  color: #fff !important;
+  border-color: #fff !important;
+  box-shadow: 6px 6px 0px #fff !important;
+}
+
+body.dark-mode h1, body.dark-mode h2, body.dark-mode h3, body.dark-mode h4, body.dark-mode h5 {
+  color: #fff;
+  border-color: #fff;
+}
+
+body.dark-mode .post h1 {
+  background-color: var(--color-secondary);
+  color: #fff;
+  border-color: #fff;
+  box-shadow: 4px 4px 0px #fff;
+}
+
+body.dark-mode .neo-btn {
+  border-color: #fff !important;
+  box-shadow: 6px 6px 0px #fff !important;
+}
+
+body.dark-mode .category-badge {
+  border-color: #fff;
+  box-shadow: 3px 3px 0px #fff;
+  color: #fff !important;
+  background-color: transparent !important;
+}
+
+body.dark-mode .main-title {
+  color: #fff;
+  text-shadow: 5px 5px 0px var(--color-primary);
+}
+
+/* ========================================================================= */
+/* RESPONSIVE DESIGN (Mobiles & Tablets)                                     */
+/* ========================================================================= */
+@media (max-width: 768px) {
+  /* General Spacing */
+  body {
+    padding: 10px !important;
+  }
+  
+  /* Titles & Typography */
+  .main-title {
+    font-size: 2.2rem !important;
+    text-shadow: 3px 3px 0px var(--color-secondary) !important;
+    margin-bottom: 1.5rem !important;
+  }
+  body.dark-mode .main-title {
+    text-shadow: 3px 3px 0px var(--color-primary) !important;
+  }
+  h1, h2, h3, h4, h5, .card-title {
+    font-size: 1.5rem;
+  }
+
+  /* Cards */
+  .neo-card, .post {
+    padding: 1.25rem !important;
+    margin-bottom: 1.5rem !important;
+    box-shadow: 4px 4px 0px #000 !important;
+  }
+  body.dark-mode .neo-card, body.dark-mode .post {
+    box-shadow: 4px 4px 0px #fff !important;
+  }
+
+  /* Buttons */
+  .neo-btn {
+    width: 100%;
+    padding: 0.8rem 1rem !important;
+    font-size: 0.9rem !important;
+    margin: 5px 0 !important;
+  }
+  
+  .back-button {
+    width: auto !important;
+    padding: 8px 12px !important;
+    font-size: 0.8rem !important;
+    margin: 0 !important;
+  }
+  
+  /* Header specific overrides */
+  header {
+    position: relative !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    padding: 15px !important;
+    padding-top: 60px !important;
+    gap: 15px !important;
+  }
+  header > div.profile-info {
+    position: absolute !important;
+    top: 10px !important;
+    left: 10px !important;
+    width: auto !important;
+    margin: 0 !important;
+  }
+  header > div.profile-info .neo-card {
+    padding: 5px 10px !important;
+    margin: 0 !important;
+  }
+  header > div.profile-info #profile-name {
+    font-size: 0.9rem !important;
+  }
+  header > div.profile-info .profile-icon {
+    padding: 2px !important;
+    margin-right: 5px !important;
+  }
+  header > div.profile-info .profile-icon svg {
+    width: 14px !important;
+    height: 14px !important;
+  }
+  
+  .header-actions {
+    flex-direction: column;
+    width: 100% !important;
+  }
+  
+  .new-post-btn {
+    width: 100% !important;
+    margin: 5px 0 !important;
+  }
+  
+  .top-right-actions {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    flex-direction: row !important;
+    gap: 8px !important;
+    width: auto !important;
+  }
+  
+  .top-right-actions .neo-btn {
+    padding: 5px 10px !important;
+    font-size: 0.8rem !important;
+    width: auto !important;
+    margin: 0 !important;
+  }
+  
+  /* Form Containers */
+  #formdiv {
+    width: 100% !important;
+    padding: 20px !important;
+    margin-top: 60px !important; /* give space for back button */
+  }
+
+  /* Post Overrides */
+  .post h1 {
+    font-size: 1.5rem !important;
+    padding: 0.5rem !important;
+    width: 100%;
+    text-align: center;
+    box-sizing: border-box;
+  }
+  .post-actions {
+    flex-direction: column !important;
+    gap: 10px !important;
+  }
+  
+  .post-actions .neo-btn {
+    width: 100% !important;
+    margin: 0 !important;
+  }
+  
+  /* Mobile Modal/Popup */
+  #neo-popup {
+    width: 90% !important;
+    min-width: unset !important;
+    padding: 20px !important;
+  }
+}

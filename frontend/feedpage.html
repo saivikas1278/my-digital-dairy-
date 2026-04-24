@@ -5,400 +5,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>My Diary - Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Edu+SA+Hand:wght@400..700&family=Oswald:wght@200..700&family=Pacifico&display=swap" rel="stylesheet">
-    <script>
-      if (localStorage.getItem('isLoggedIn') !== 'true') {
-        window.location.href = 'login.html';
-      }
-    </script>
-    <style>
-      body {
-        font-family: 'Edu SA Hand', cursive;
-        background: url('bgimg.jpg') no-repeat center center fixed;
-        background-size: cover;
-      }
-      .allposts {
-        max-width: 700px;
-        margin: 40px auto;
-        display: flex;
-        flex-direction: column;
-        gap: 32px;
-      }
-      .post {
-  background: rgba(255, 255, 255, 0.85);
-  border-radius: 22px;
-  box-shadow: 0 8px 32px rgba(23,76,142,0.12), 0 2px 8px rgba(0,0,0,0.10);
-  padding: 2.5rem 2rem;
-  border: 1.5px solid #e0d7c6;
-  position: relative;
-  overflow: hidden;
-  transition: box-shadow 0.3s, transform 0.3s, border 0.3s;
-  word-break: break-word;
-  backdrop-filter: blur(2px);
-  animation: fadeInUp 0.7s cubic-bezier(.39,.575,.56,1.000);
-}
-.post:hover {
-  box-shadow: 0 16px 48px rgba(23,76,142,0.18), 0 4px 16px rgba(0,0,0,0.12);
-  transform: translateY(-8px) scale(1.025);
-  border: 2px solid #174c8e;
-  background: rgba(255,255,255,0.97);
-}
-.post h1 {
-  font-size: 2.1rem;
-  color: #174c8e;
-  margin-bottom: 14px;
-  font-family: 'Pacifico', cursive;
-  letter-spacing: 1px;
-  text-shadow: 1px 2px 8px #f3e9d2;
-}
-.post p {
-  font-size: 1.15rem;
-  color: #333;
-  margin-bottom: 0;
-  font-family: 'Edu SA Hand', cursive;
-  line-height: 1.7;
-  letter-spacing: 0.5px;
-}
-@keyframes fadeInUp {
-  0% { opacity: 0; transform: translateY(40px);}
-  100% { opacity: 1; transform: translateY(0);}
-}
-      .viwepost {
-        background: linear-gradient(90deg, #007bff 0%, #1365bc 100%);
-        color: #fff;
-        border: none;
-        border-radius: 8px;
-        font-weight: 600;
-        padding: 10px 0;
-        width: 150px;
-        margin-top: 18px;
-        letter-spacing: 1px;
-        box-shadow: 0 2px 8px rgba(0,123,255,0.10);
-        transition: background 0.3s, box-shadow 0.3s, transform 0.2s;
-        font-family: Pacifico, 'Edu SA Hand', cursive;
-        display: block;
-      }
-      .viwepost:hover, .viwepost:focus {
-        background: linear-gradient(135deg, #45a049, #2d6a2d);
-        box-shadow: 0 4px 16px rgba(76,175,80,0.25);
-        color: #fff;
-        transform: translateY(-2px) scale(1.02);
-      }
-.post-date {
-  position: absolute;
-  right: 24px;
-  bottom: 18px;
-  font-size: 0.98rem;
-  color: #888;
-  font-family: 'Oswald', sans-serif;
-  opacity: 0.85;
-  letter-spacing: 0.5px;
-}
-.post {
-  position: relative; /* Make sure .post is relative for absolute positioning */
-}
-
- @keyframes fadeIn {
-    0% { opacity: 0; transform: translateY(-20px); }
-    100% { opacity: 1; transform: translateY(0); }
-  }
-
-  .animate-fadeIn {
-    animation: fadeIn 1s ease-out forwards;
-  }
-
-
-  .edit-btn:hover {
-  background: linear-gradient(135deg, #ffb300, #ff8f00) !important;
-  color: #fff !important;
-  transform: scale(1.05);
-  box-shadow: 0 4px 15px rgba(255, 193, 7, 0.4) !important;
-}
-
-.delete-btn:hover {
-  background: linear-gradient(135deg, #c82333, #a71e2a) !important;
-  color: #fff !important;
-  transform: scale(1.05);
-  box-shadow: 0 4px 15px rgba(220, 53, 69, 0.4) !important;
-}
-
-.view-btn:hover {
-  background: linear-gradient(135deg, #45a049, #2d6a2d) !important;
-  color: #fff !important;
-  transform: scale(1.05);
-  box-shadow: 0 4px 15px rgba(76, 175, 80, 0.4) !important;
-}
-
-.search-filter-container {
-  max-width: 700px;
-  margin: 20px auto;
-  padding: 0 20px;
-}
-
-.search-input, .sort-select, .clear-btn {
-  border-radius: 25px;
-  padding: 12px 20px;
-  border: 2px solid #e0d7c6;
-  font-family: 'Edu SA Hand', cursive;
-  transition: border-color 0.3s, box-shadow 0.3s;
-}
-
-.search-input:focus, .sort-select:focus {
-  border-color: #174c8e;
-  box-shadow: 0 0 8px rgba(23, 76, 142, 0.25);
-  outline: none;
-}
-
-.stats-container {
-  text-align: center;
-  margin: 15px auto;
-  max-width: 700px;
-  padding: 0 20px;
-}
-
-.stats-text {
-  font-family: 'Oswald', sans-serif;
-  color: #174c8e;
-  font-size: 1.1rem;
-  background: rgba(255, 255, 255, 0.8);
-  padding: 8px 16px;
-  border-radius: 20px;
-  display: inline-block;
-  box-shadow: 0 2px 8px rgba(23, 76, 142, 0.15);
-}
-
-/* Dark Mode Styles */
-body.dark-mode {
-  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-}
-
-body.dark-mode .post {
-  background: rgba(30, 30, 50, 0.9);
-  border: 1.5px solid #444;
-  color: #e0e0e0;
-}
-
-body.dark-mode .post:hover {
-  background: rgba(40, 40, 60, 0.95);
-  border: 2px solid #5a7bd8;
-}
-
-body.dark-mode .post h1 {
-  color: #7db8ff;
-  text-shadow: 1px 2px 8px rgba(125, 184, 255, 0.3);
-}
-
-body.dark-mode .post p {
-  color: #b0b0b0;
-}
-
-body.dark-mode .post-date,
-body.dark-mode .word-count {
-  color: #888;
-}
-
-body.dark-mode .search-input,
-body.dark-mode .sort-select,
-body.dark-mode .clear-btn {
-  background: rgba(30, 30, 50, 0.8);
-  border-color: #444;
-  color: #e0e0e0;
-}
-
-body.dark-mode .search-input:focus,
-body.dark-mode .sort-select:focus {
-  border-color: #7db8ff;
-  box-shadow: 0 0 8px rgba(125, 184, 255, 0.4);
-}
-
-body.dark-mode .stats-text {
-  background: rgba(30, 30, 50, 0.8);
-  color: #7db8ff;
-  box-shadow: 0 2px 8px rgba(125, 184, 255, 0.2);
-}
-
-.dark-mode-toggle {
-  border-radius: 50%;
-  width: 45px;
-  height: 45px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s ease;
-}
-
-.dark-mode-toggle:hover {
-  transform: scale(1.1);
-}
-
-/* Profile Section Styles */
-.profile-info {
-  position: absolute;
-  top: 18px;
-  left: 24px;
-  z-index: 10;
-}
-
-.profile-card {
-  display: flex;
-  align-items: center;
-  background: rgba(255,255,255,0.85);
-  border-radius: 24px;
-  padding: 7px 16px;
-  box-shadow: 0 2px 8px rgba(23, 76, 142, 0.13);
-}
-
-.profile-icon {
-  display: inline-flex;
-  width: 36px;
-  height: 36px;
-  background: #174c8e;
-  color: #fff;
-  border-radius: 50%;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.4rem;
-  margin-right: 10px;
-}
-
-.profile-name {
-  font-weight: 600;
-  color: #174c8e;
-  font-family: 'Oswald', sans-serif;
-  font-size: 1.08rem;
-}
-
-/* Title Styles */
-.main-title {
-  font-family: 'Pacifico', cursive;
-  color: #174c8e;
-  text-align: center;
-  margin: 24px 0;
-}
-
-.title-gradient {
-  background: linear-gradient(135deg, #174c8e 0%, #007bff 50%, #5a7bd8 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  font-size: 3rem;
-  font-weight: 700;
-  text-shadow: 2px 2px 4px rgba(23, 76, 142, 0.1);
-}
-
-/* Post Action Styles */
-.post-actions {
-  margin-top: 18px;
-  display: flex;
-  gap: 10px;
-}
-
-.action-btn {
-  width: 100px;
-  padding: 6px 0;
-  font-weight: 600;
-  letter-spacing: 1px;
-  border-radius: 7px;
-  transition: all 0.2s ease;
-}
-
-.view-btn {
-  box-shadow: 0 1px 4px rgba(76, 175, 80, 0.33);
-}
-
-.edit-btn {
-  box-shadow: 0 1px 4px rgba(255, 193, 7, 0.46);
-}
-
-.delete-btn {
-  box-shadow: 0 1px 4px rgba(220, 53, 69, 0.33);
-}
-
-/* Post Meta Styles */
-.post-meta {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
-}
-
-.category-badge {
-  color: white;
-  padding: 4px 12px;
-  border-radius: 15px;
-  font-size: 0.8rem;
-  font-weight: 600;
-  text-transform: uppercase;
-}
-
-.mood-indicator {
-  font-size: 1.5rem;
-}
-
-.post-date {
-  position: absolute;
-  right: 24px;
-  bottom: 18px;
-  font-size: 0.98rem;
-  color: #888;
-  font-family: 'Oswald', sans-serif;
-  opacity: 0.85;
-  letter-spacing: 0.5px;
-}
-
-.word-count {
-  position: absolute;
-  left: 24px;
-  bottom: 18px;
-  font-size: 0.9rem;
-  color: #888;
-  font-family: 'Oswald', sans-serif;
-}
-
-/* Dark Mode Profile Styles */
-body.dark-mode .profile-card {
-  background: rgba(30, 30, 50, 0.85);
-}
-
-body.dark-mode .profile-name {
-  color: #7db8ff;
-}
-
-body.dark-mode .main-title {
-  color: #7db8ff;
-}
-      
-    </style>
-
+    <link rel="stylesheet" href="neobrutalism.css">
+    <script src="neo-popup.js"></script>
+    <script src="config.js"></script>
   </head>
   <body>
-        <div id="profile-info" class="profile-info">
-  <div class="profile-card">
-    <span class="profile-icon">
-      <svg width="22" height="22" fill="currentColor" viewBox="0 0 16 16"><path d="M10 5a2 2 0 1 1-4 0 2 2 0 0 1 4 0z"/><path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37c.69-1.19 2.065-2.37 5.468-2.37 3.403 0 4.778 1.18 5.468 2.37A7 7 0 0 0 8 1z"/></svg>
-    </span>
-    <span id="profile-name" class="profile-name"></span>
-  </div>
-</div>
+    <header style="display: flex; justify-content: space-between; align-items: center; padding: 20px; max-width: 1200px; margin: 0 auto; flex-wrap: wrap; gap: 20px;">
+      <!-- Profile -->
+      <div id="profile-info" class="profile-info" style="margin: 0;">
+        <div class="neo-card profile-card" style="padding: 10px 20px; display: inline-flex; align-items: center; border-radius: 0; background: var(--color-primary); margin: 0;">
+          <span class="profile-icon" style="margin-right: 10px; border: 2px solid #000; background: #fff; border-radius: 0; padding: 4px; display: flex;">
+            <svg width="22" height="22" fill="#000" viewBox="0 0 16 16"><path d="M10 5a2 2 0 1 1-4 0 2 2 0 0 1 4 0z"/><path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37c.69-1.19 2.065-2.37 5.468-2.37 3.403 0 4.778 1.18 5.468 2.37A7 7 0 0 0 8 1z"/></svg>
+          </span>
+          <span id="profile-name" class="profile-name" style="font-weight: 700; font-size: 1.2rem; text-transform: uppercase;"></span>
+        </div>
+      </div>
 
-    <div class="  text-end p-3">
-      <button id="darkModeToggle" class="btn btn-outline-secondary me-2 dark-mode-toggle">
-        <span id="darkModeIcon">🌙</span>
-      </button>
-      <a class="btn btn-primary w-25" href="post.html">New Post</a>
-      <a class="btn btn-danger w-25" href="login.html" onclick="localStorage.removeItem('isLoggedIn')">Log out</a>
-      <h1 class="main-title">
+      <!-- Title -->
+      <h1 class="main-title" style="margin: 0; text-align: center; flex: 1; min-width: 200px;">
         <span class="title-gradient">Happy Day</span>
       </h1>
-    </div>
+
+      <!-- Actions -->
+      <div class="header-actions" style="display: flex; gap: 15px; align-items: center;">
+        <a class="neo-btn new-post-btn" href="post.html" style="margin: 0;">New Post</a>
+        <div class="top-right-actions" style="display: flex; gap: 10px;">
+          <button id="darkModeToggle" class="neo-btn neo-btn-secondary dark-mode-toggle" style="padding: 10px 15px; margin: 0;">
+            <span id="darkModeIcon">🌙</span>
+          </button>
+          <a class="neo-btn neo-btn-danger logout-btn" href="login.html" onclick="localStorage.removeItem('isLoggedIn')" style="margin: 0;">Log out</a>
+        </div>
+      </div>
+    </header>
 
     <!-- Search and Filter Section -->
-    <div class="search-filter-container">
+    <div class="search-filter-container" style="max-width: 800px; margin: 20px auto;">
       <div class="row g-3">
-        <div class="col-md-4">
+        <div class="col-12 col-md-4">
           <input type="text" id="searchInput" class="form-control search-input" placeholder="🔍 Search posts by title or content...">
         </div>
-        <div class="col-md-3">
+        <div class="col-6 col-md-3">
           <select id="categoryFilter" class="form-select sort-select" title="Filter by category">
             <option value="">📂 All Categories</option>
             <option value="personal">📝 Personal</option>
@@ -410,24 +56,24 @@ body.dark-mode .main-title {
             <option value="other">📌 Other</option>
           </select>
         </div>
-        <div class="col-md-3">
+        <div class="col-6 col-md-3">
           <select id="sortSelect" class="form-select sort-select" title="Sort posts by">
             <option value="newest">📅 Newest First</option>
             <option value="oldest">📅 Oldest First</option>
             <option value="title">🔤 By Title</option>
           </select>
         </div>
-        <div class="col-md-2">
-          <button id="clearSearch" class="btn btn-outline-secondary w-100 clear-btn">Clear</button>
+        <div class="col-12 col-md-2">
+          <button id="clearSearch" class="neo-btn neo-btn-secondary w-100 clear-btn">Clear</button>
         </div>
       </div>
     </div>
 
     <!-- Stats Section -->
-    <div class="stats-container">
-      <span id="postStats" class="stats-text">📝 Loading posts...</span>
+    <div class="stats-container" style="text-align: center; margin-bottom: 20px;">
+      <span id="postStats" class="stats-text" style="display: inline-block; padding: 10px; border: 3px solid #000; box-shadow: 4px 4px 0px #000; background: var(--color-tertiary); font-weight: 700;">📝 Loading posts...</span>
     </div>
-    <div class="allposts">
+    <div class="allposts" style="max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px;">
       <!-- Posts will be loaded here dynamically -->
     </div>
     
@@ -437,12 +83,15 @@ body.dark-mode .main-title {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.min.js"></script>
     <script>
       async function loadPosts() {
-       const userId = localStorage.getItem('userId');
-const response = await fetch(`http://localhost:20000/posts?userId=${userId}`);
+       const userId = localStorage.getItem('userId');      try {
+        const response = await fetch(`${API_BASE_URL}/posts?userId=${userId}`);
         const posts = await response.json();
         window.allPosts = posts; // Store all posts globally for filtering
         displayPosts(posts);
         updateStats(posts.length);
+      } catch (err) {
+        console.error(err);
+      }
       }
 
       function displayPosts(posts) {
@@ -451,13 +100,13 @@ const response = await fetch(`http://localhost:20000/posts?userId=${userId}`);
         
         if (posts.length === 0) {
           container.innerHTML = `
-            <div class="empty-state" style="text-align: center; padding: 60px 20px; background: rgba(255,255,255,0.9); border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
+            <div class="neo-card empty-state" style="text-align: center;">
               <div style="font-size: 4rem; margin-bottom: 20px;">📖</div>
-              <h3 style="color: #174c8e; font-family: 'Pacifico', cursive; margin-bottom: 15px;">No posts found</h3>
-              <p style="font-family: 'Edu SA Hand', cursive; color: #666; font-size: 1.2rem; margin-bottom: 20px;">
+              <h3 style="margin-bottom: 15px;">No posts found</h3>
+              <p style="font-size: 1.2rem; margin-bottom: 20px; font-weight: 600;">
                 ${document.getElementById('searchInput').value ? 'Try adjusting your search or filters' : 'Start your journaling journey by creating your first post!'}
               </p>
-              <a href="post.html" class="btn btn-primary" style="font-family: 'Edu SA Hand', cursive; padding: 12px 24px; border-radius: 25px;">
+              <a href="post.html" class="neo-btn">
                 ✨ Create Your First Post
               </a>
             </div>
@@ -472,19 +121,21 @@ const response = await fetch(`http://localhost:20000/posts?userId=${userId}`);
   const mood = post.mood || '😊';
   container.innerHTML += `
   <div class="post" data-id="${post._id}" data-category="${post.category || 'personal'}">
-    <div class="post-meta">
+    <div class="post-meta" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
       <span class="category-badge" style="background: ${getCategoryColor(post.category)};">${categoryIcon} ${(post.category || 'personal').toUpperCase()}</span>
-      <span class="mood-indicator" title="Mood: ${mood}">${mood}</span>
+      <span class="mood-indicator" title="Mood: ${mood}" style="font-size: 1.8rem;">${mood}</span>
     </div>
-    <h1>${post.title}</h1>
-    <p>${preview}</p>
-    <div class="post-actions">
-      <a class="btn viwepost btn-sm d-inline-block action-btn view-btn" href="dedicatedpage.html?id=${post._id}">View post</a>
-      <button class="btn btn-warning btn-sm edit-post d-inline-block action-btn edit-btn">Edit</button>
-      <button class="btn btn-danger btn-sm delete-post d-inline-block action-btn delete-btn">Delete</button>
+    <h1 style="margin-bottom: 20px;">${post.title}</h1>
+    <p style="font-size: 1.1rem; line-height: 1.6; margin-bottom: 30px;">${preview}</p>
+    <div class="post-actions" style="display: flex; gap: 15px; margin-bottom: 30px; flex-wrap: wrap;">
+      <a class="neo-btn" href="dedicatedpage.html?id=${post._id}" style="margin: 0;">View post</a>
+      <button class="neo-btn neo-btn-warning edit-post" style="margin: 0;">Edit</button>
+      <button class="neo-btn neo-btn-danger delete-post" style="margin: 0;">Delete</button>
     </div>
-    <span class="post-date">${post.date ? post.date : ''}</span>
-    <span class="word-count">${wordCount} words</span>
+    <div style="display: flex; justify-content: space-between; padding-top: 20px; border-top: 4px solid var(--color-dark); font-weight: 700; text-transform: uppercase;">
+      <span class="post-date">${post.date ? post.date : ''}</span>
+      <span class="word-count">${wordCount} words</span>
+    </div>
   </div>
   `;
 });
@@ -586,15 +237,15 @@ document.addEventListener('click', async function(e) {
   if (e.target.classList.contains('delete-post')) {
     const postDiv = e.target.closest('.post');
     const postId = postDiv.getAttribute('data-id');
-    if (confirm('Are you sure you want to delete this post?')) {
-      const res = await fetch(`http://localhost:20000/posts/${postId}`, { method: 'DELETE' });
-      if (res.ok) {
+      if (confirm('Are you sure you want to delete this post?')) {
+        const res = await fetch(`${API_BASE_URL}/posts/${postId}`, { method: 'DELETE' });
+        if (res.ok) {
         // Remove from allPosts array
         window.allPosts = window.allPosts.filter(post => post._id !== postId);
         filterPosts(); // Refresh display
-        alert('Post deleted!');
+        showNeoPopup('Post deleted!', 'success');
       } else {
-        alert('Failed to delete post.');
+        showNeoPopup('Failed to delete post.', 'error');
       }
     }
   }
