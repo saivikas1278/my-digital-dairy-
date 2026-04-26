@@ -1,0 +1,12 @@
+{
+  "name": "my-digital-dairy-root",
+  "version": "1.0.0",
+  "description": "Root package for Digital Diary",
+  "scripts": {
+    "start": "node backend/index.js",
+    "build": "cd backend && npm install"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
