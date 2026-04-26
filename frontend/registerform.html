@@ -30,7 +30,7 @@
       <label for="inputPassword" class="form-label">Set Password</label>
       <input type="password" name="password" class="form-control" id="inputPassword" aria-describedby="passwordHelpBlock" required>
       <div id="passwordHelpBlock" class="form-text"></div>
-      <p>already have an account?? <a href="login.html">log-in</a></p>
+      <p>already have an account?? <a href="index.html">log-in</a></p>
       <button type="submit" class="neo-btn w-100" id="loginbutton" >Register</button>
     </div>
   </div>
@@ -58,7 +58,7 @@
     const result = await response.text();
 
     if (response.ok && result.toLowerCase().includes('success')) {
-      showNeoPopup(result, 'success', 'login.html');
+      showNeoPopup(result, 'success', 'index.html');
     } else {
       showNeoPopup(result, 'error');
     }
