@@ -64,7 +64,8 @@ app.post('/registerform', async (req, res) => {
     await newUser.save();
     res.status(200).send('Registration successful');
   } catch (err) {
-    res.status(500).send('Registration failed');
+    console.error('Registration Error:', err);
+    res.status(500).send('Registration failed: ' + err.message);
   }
 });
 
