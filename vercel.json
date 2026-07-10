@@ -1,23 +1,12 @@
 {
-  "version": 2,
-  "builds": [
+  "rewrites": [
     {
-      "src": "backend/index.js",
-      "use": "@vercel/node"
+      "source": "/(registerform|userlogin|newpost|posts|posts/.*)",
+      "destination": "/api/index.js"
     },
     {
-      "src": "frontend/**",
-      "use": "@vercel/static"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(registerform|userlogin|newpost|posts|posts/.*)",
-      "dest": "backend/index.js"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "frontend/$1"
+      "source": "/(.*)",
+      "destination": "/frontend/$1"
     }
   ]
 }
