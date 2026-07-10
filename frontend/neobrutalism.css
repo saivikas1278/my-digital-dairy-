@@ -187,6 +187,18 @@ body.dark-mode .neo-card, body.dark-mode .post, body.dark-mode .form-control, bo
   box-shadow: 6px 6px 0px #fff !important;
 }
 
+body.dark-mode .form-control::placeholder,
+body.dark-mode .form-select::placeholder,
+body.dark-mode input::placeholder,
+body.dark-mode textarea::placeholder {
+  color: rgba(255, 255, 255, 0.6) !important;
+}
+
+body.dark-mode option {
+  background-color: #2d2d2d !important;
+  color: #fff !important;
+}
+
 body.dark-mode h1, body.dark-mode h2, body.dark-mode h3, body.dark-mode h4, body.dark-mode h5 {
   color: #fff;
   border-color: #fff;

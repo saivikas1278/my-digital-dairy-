@@ -1,9 +1,9 @@
-require('dotenv').config();
+const path = require('path');
+require('dotenv').config({ path: path.join(__dirname, '.env') });
 const express = require('express');
 const cors = require('cors');
 const bcrypt = require('bcryptjs');
 const mongoose = require('mongoose');
-const path = require('path');
 
 const app = express();
 app.use(cors());
@@ -13,11 +13,25 @@ app.use(express.urlencoded({ extended: true }));
 // Serve static files from frontend directory
 app.use(express.static(path.join(__dirname, '../frontend')));
 
-// MongoDB connection
-mongoose.connect(process.env.MONGODB_URI)
+// MongoDB connection with fallback
+const dbURI = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/my-digital-diary';
 
-.then(() => console.log('✅ MongoDB connected'))
-.catch((err) => console.error('❌ MongoDB connection error:', err));
+function connectDB(uri) {
+  return mongoose.connect(uri)
+    .then(() => {
+      console.log(`✅ MongoDB connected successfully to: ${uri}`);
+    })
+    .catch((err) => {
+      console.error(`❌ MongoDB connection failed for: ${uri} - ${err.message}`);
+      const fallbackURI = 'mongodb://127.0.0.1:27017/my-digital-diary';
+      if (uri !== fallbackURI) {
+        console.log(`🔄 Attempting fallback to local MongoDB (${fallbackURI})...`);
+        return connectDB(fallbackURI);
+      }
+    });
+}
+
+connectDB(dbURI);
 
 // Schemas
 const userSchema = new mongoose.Schema({ name: String, email: String, password: String });
