@@ -1,12 +1,12 @@
 {
-  "rewrites": [
+  "routes": [
     {
-      "source": "/(registerform|userlogin|newpost|posts|posts/.*)",
-      "destination": "/api"
+      "src": "/(registerform|userlogin|newpost|posts|posts/.*)",
+      "dest": "/api/index.js"
     },
     {
-      "source": "/(.*)",
-      "destination": "/frontend/$1"
+      "src": "/(.*)",
+      "dest": "/frontend/$1"
     }
   ]
 }
