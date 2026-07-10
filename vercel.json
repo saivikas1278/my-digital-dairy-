@@ -2,7 +2,7 @@
   "routes": [
     {
       "src": "/(registerform|userlogin|newpost|posts|posts/.*)",
-      "dest": "/api/index.js"
+      "dest": "/api"
     },
     {
       "src": "/(.*)",
