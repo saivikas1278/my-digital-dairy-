@@ -14,7 +14,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '../frontend')));
 
 // MongoDB connection
-const dbURI = process.env.MONGODB_URI;
+const dbURI = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/my-digital-diary';
 
 function connectDB(uri) {
   if (!uri) {
@@ -27,10 +27,15 @@ function connectDB(uri) {
     serverSelectionTimeoutMS: 5000
   })
     .then(() => {
-      console.log(`✅ MongoDB connected successfully to Atlas Database`);
+      console.log(`✅ MongoDB connected successfully to database: ${uri}`);
     })
     .catch((err) => {
-      console.error(`❌ MongoDB connection failed: ${err.message}`);
+      console.error(`❌ MongoDB connection failed for ${uri}: ${err.message}`);
+      const fallbackURI = 'mongodb://127.0.0.1:27017/my-digital-diary';
+      if (uri !== fallbackURI) {
+        console.log(`🔄 Attempting fallback to local MongoDB (${fallbackURI})...`);
+        return connectDB(fallbackURI);
+      }
     });
 }
 
