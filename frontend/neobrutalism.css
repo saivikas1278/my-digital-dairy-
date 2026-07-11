@@ -241,7 +241,14 @@ body.dark-mode .main-title {
   .main-title {
     font-size: 2.2rem !important;
     text-shadow: 3px 3px 0px var(--color-secondary) !important;
-    margin-bottom: 1.5rem !important;
+    margin-bottom: 1rem !important;
+    order: 2; /* Position title in between profile and actions */
+  }
+  .main-title.position-absolute {
+    position: static !important;
+    width: 100% !important;
+    margin-top: 15px !important;
+    margin-bottom: 15px !important;
   }
   body.dark-mode .main-title {
     text-shadow: 3px 3px 0px var(--color-primary) !important;
@@ -269,75 +276,77 @@ body.dark-mode .main-title {
   }
   
   .back-button {
-    width: auto !important;
-    padding: 8px 12px !important;
-    font-size: 0.8rem !important;
-    margin: 0 !important;
+    position: static !important;
+    width: 100% !important;
+    padding: 10px !important;
+    font-size: 0.9rem !important;
+    margin-bottom: 15px !important;
+    display: block !important;
   }
   
   /* Header specific overrides */
   header {
-    position: relative !important;
     flex-direction: column !important;
-    align-items: stretch !important;
+    align-items: center !important;
     padding: 15px !important;
-    padding-top: 60px !important;
     gap: 15px !important;
+    display: flex !important;
   }
   header > div.profile-info {
-    position: absolute !important;
-    top: 10px !important;
-    left: 10px !important;
-    width: auto !important;
-    margin: 0 !important;
+    position: static !important;
+    width: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+    margin: 0 0 5px 0 !important;
+    order: 1; /* Profile info on top */
   }
   header > div.profile-info .neo-card {
-    padding: 5px 10px !important;
+    padding: 8px 15px !important;
     margin: 0 !important;
+    display: inline-flex !important;
   }
   header > div.profile-info #profile-name {
-    font-size: 0.9rem !important;
+    font-size: 1rem !important;
   }
   header > div.profile-info .profile-icon {
-    padding: 2px !important;
-    margin-right: 5px !important;
-  }
-  header > div.profile-info .profile-icon svg {
-    width: 14px !important;
-    height: 14px !important;
+    padding: 3px !important;
+    margin-right: 8px !important;
   }
   
   .header-actions {
-    flex-direction: column;
+    flex-direction: column !important;
     width: 100% !important;
+    order: 3; /* Buttons at bottom */
+    gap: 8px !important;
   }
   
   .new-post-btn {
     width: 100% !important;
-    margin: 5px 0 !important;
+    margin: 0 !important;
   }
   
   .top-right-actions {
-    position: absolute;
-    top: 10px;
-    right: 10px;
+    position: static !important;
     flex-direction: row !important;
     gap: 8px !important;
-    width: auto !important;
+    width: 100% !important;
+    display: flex !important;
+    justify-content: space-between !important;
   }
   
   .top-right-actions .neo-btn {
-    padding: 5px 10px !important;
-    font-size: 0.8rem !important;
-    width: auto !important;
+    flex: 1 !important;
+    padding: 10px !important;
+    font-size: 0.9rem !important;
     margin: 0 !important;
   }
   
   /* Form Containers */
   #formdiv {
     width: 100% !important;
+    max-width: 100% !important;
     padding: 20px !important;
-    margin-top: 60px !important; /* give space for back button */
+    margin: 20px auto 0 auto !important;
   }
 
   /* Post Overrides */

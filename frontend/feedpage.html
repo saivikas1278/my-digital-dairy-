@@ -29,6 +29,7 @@
       <!-- Actions -->
       <div class="header-actions" style="display: flex; gap: 15px; align-items: center;">
         <a class="neo-btn new-post-btn" href="post.html" style="margin: 0;">New Post</a>
+        <a class="neo-btn" href="games.html" style="margin: 0; background-color: var(--color-tertiary);">Play Games</a>
         <div class="top-right-actions" style="display: flex; gap: 10px;">
           <button id="darkModeToggle" class="neo-btn neo-btn-secondary dark-mode-toggle" style="padding: 10px 15px; margin: 0;">
             <span id="darkModeIcon">🌙</span>
@@ -94,6 +95,16 @@
       }
       }
 
+      function escapeHTML(str) {
+        if (!str) return '';
+        return str
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#039;');
+      }
+
       function displayPosts(posts) {
         const container = document.querySelector('.allposts');
         container.innerHTML = '';
@@ -115,31 +126,33 @@
         }
 
       posts.forEach(post => {
-  const preview = post.content.length > 100 ? post.content.substring(0, 100) + '...' : post.content;
-  const wordCount = post.content.split(' ').length;
-  const categoryIcon = getCategoryIcon(post.category);
-  const mood = post.mood || '😊';
-  container.innerHTML += `
-  <div class="post" data-id="${post._id}" data-category="${post.category || 'personal'}">
-    <div class="post-meta" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-      <span class="category-badge" style="background: ${getCategoryColor(post.category)};">${categoryIcon} ${(post.category || 'personal').toUpperCase()}</span>
-      <span class="mood-indicator" title="Mood: ${mood}" style="font-size: 1.8rem;">${mood}</span>
-    </div>
-    <h1 style="margin-bottom: 20px;">${post.title}</h1>
-    <p style="font-size: 1.1rem; line-height: 1.6; margin-bottom: 30px;">${preview}</p>
-    <div class="post-actions" style="display: flex; gap: 15px; margin-bottom: 30px; flex-wrap: wrap;">
-      <a class="neo-btn" href="dedicatedpage.html?id=${post._id}" style="margin: 0;">View post</a>
-      <button class="neo-btn neo-btn-warning edit-post" style="margin: 0;">Edit</button>
-      <button class="neo-btn neo-btn-danger delete-post" style="margin: 0;">Delete</button>
-    </div>
-    <div style="display: flex; justify-content: space-between; padding-top: 20px; border-top: 4px solid var(--color-dark); font-weight: 700; text-transform: uppercase;">
-      <span class="post-date">${post.date ? post.date : ''}</span>
-      <span class="word-count">${wordCount} words</span>
-    </div>
-  </div>
-  `;
-});
+        const preview = post.content.length > 100 ? post.content.substring(0, 100) + '...' : post.content;
+        const wordCount = post.content.split(' ').length;
+        const categoryIcon = getCategoryIcon(post.category);
+        const mood = post.mood || '😊';
+        
+        container.innerHTML += `
+        <div class="post" data-id="${post._id}" data-category="${post.category || 'personal'}">
+          <div class="post-meta" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <span class="category-badge" style="background: ${getCategoryColor(post.category)};">${categoryIcon} ${(post.category || 'personal').toUpperCase()}</span>
+            <span class="mood-indicator" title="Mood: ${mood}" style="font-size: 1.8rem;">${mood}</span>
+          </div>
+          <h1 style="margin-bottom: 20px;">${escapeHTML(post.title)}</h1>
+          <p style="font-size: 1.1rem; line-height: 1.6; margin-bottom: 30px;">${escapeHTML(preview).replace(/\n/g, '<br>')}</p>
+          <div class="post-actions" style="display: flex; gap: 15px; margin-bottom: 30px; flex-wrap: wrap;">
+            <a class="neo-btn" href="dedicatedpage.html?id=${post._id}" style="margin: 0;">View post</a>
+            <button class="neo-btn neo-btn-warning edit-post" style="margin: 0;">Edit</button>
+            <button class="neo-btn neo-btn-danger delete-post" style="margin: 0;">Delete</button>
+          </div>
+          <div style="display: flex; justify-content: space-between; padding-top: 20px; border-top: 4px solid var(--color-dark); font-weight: 700; text-transform: uppercase;">
+            <span class="post-date">${post.date ? post.date : ''}</span>
+            <span class="word-count">${wordCount} words</span>
+          </div>
+        </div>
+        `;
+      });
       }
+
 
       function getCategoryIcon(category) {
         const icons = {

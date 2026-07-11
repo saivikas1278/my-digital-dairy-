@@ -23,6 +23,16 @@
         return params.get('id');
       }
 
+      function escapeHTML(str) {
+        if (!str) return '';
+        return str
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#039;');
+      }
+
       async function loadPost() {
         const postId = getPostIdFromUrl();
         if (!postId) {
@@ -35,11 +45,11 @@
           const post = await response.json();
           const container = document.querySelector('.post');
           container.innerHTML = `
-            <h1>${post.title}</h1>
-            <p>${post.content}</p>
+            <h1>${escapeHTML(post.title)}</h1>
+            <p style="font-size: 1.2rem; line-height: 1.7; white-space: pre-wrap;">${escapeHTML(post.content)}</p>
           `;
         } catch (error) {
-          document.querySelector('.post').innerHTML = `<p>${error.message}</p>`;
+          document.querySelector('.post').innerHTML = `<p>${escapeHTML(error.message)}</p>`;
         }
       }
       // Check dark mode
