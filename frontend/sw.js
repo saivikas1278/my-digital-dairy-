@@ -6,7 +6,6 @@ const ASSETS = [
   'post.html',
   'edit.html',
   'dedicatedpage.html',
-  'games.html',
   'neobrutalism.css',
   'neo-popup.js',
   'config.js'
